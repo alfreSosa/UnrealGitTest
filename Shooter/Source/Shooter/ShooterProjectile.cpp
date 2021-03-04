@@ -4,7 +4,6 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include "DrawDebugHelpers.h"
-#include "AShooterCharacter.h"
 
 AShooterProjectile::AShooterProjectile() 
 {
@@ -40,14 +39,7 @@ void AShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
         // Missing comment: Draw debug
-        if (OtherActor->IsA(AShooterCharacter::StaticClass()))
-        {
-            DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Red, false, 10.0f);
-        }
-        else
-        {
-            DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Green, false, 10.0f);
-        }
+        DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Red, false, 10.0f);
 		Destroy();
 	}
     else
