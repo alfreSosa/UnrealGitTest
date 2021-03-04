@@ -38,11 +38,13 @@ void AShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+        // Missing comment: Draw debug
         DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Red, false, 10.0f);
 		Destroy();
 	}
     else
     {
+        // Missing comment: Draw debug
         DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Blue, false, 10.0f);
     }
 }
