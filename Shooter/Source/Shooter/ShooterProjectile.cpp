@@ -3,6 +3,7 @@
 #include "ShooterProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "DrawDebugHelpers.h"
 
 AShooterProjectile::AShooterProjectile() 
 {
@@ -37,7 +38,11 @@ void AShooterProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
+        DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Red, false, 10.0f);
 		Destroy();
 	}
+    else
+    {
+        DrawDebugPoint(GetWorld(), Hit.ImpactPoint, 10.0f, FColor::Blue, false, 10.0f);
+    }
 }
